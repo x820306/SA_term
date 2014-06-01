@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/bootstrap.css" rel="stylesheet">
+<title>Create/Edit Example</title>
+<style type="text/css">
+.panel-default
+{
+	height: 300px;
+	width: 715px;	
+}
+
+.form-control
+{
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.layer2
+{
+	margin-left:8px;
+	margin-top: 6px;	
+}
+
+.tarea
+{
+	width: 713px;
+	height: 259px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+.tarea2
+{
+	width: 713px;
+	height: 225px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+</style>
+</head>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<div class="container">
+<div style="font-size:40pt">Create/Edit Example</div>
+<br>
+<form name="f1" action="" method="post">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Description</h3>
+  </div>
+  <textarea class="tarea" name="desN"></textarea>
+</div>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Code</h3>
+  </div>
+  <textarea class="tarea" name="codN"></textarea>
+</div>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Output</h3>
+  </div>
+  <textarea class="tarea2" name="outN"></textarea>
+  <div class="layer2"><input type="File" name="YouFile"></div>
+</div>
+<div align=center style="width:715px;">
+<button type="button" class="btn btn-default" onClick="document.f1.submit();">Submit</button>
+</div>
+<br>
+<br>
+</div>
+</body>
+</html>
