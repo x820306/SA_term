@@ -15,3 +15,10 @@
 .affix {
 	top: 20px;
 }
+.my-tab-content{
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	height: 300px;
+	padding: 10px;
+}
