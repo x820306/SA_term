@@ -1,124 +1,148 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/bootstrap.css" rel="stylesheet">
-<title>Function</title>
-<style type="text/css">
-.container
-{
-	margin-bottom: 40px;	
-	
-}
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/mycss.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<title>Function</title>
+		<style type="text/css">
+			.input-group
+			{
+				margin-top: 10px;
+			}
+			.dscc
+			{
+				height: 230px;	
+				overflow: auto;
+			}
+			.dv_tag{
+				color: red;
+				display: inline
+			}
+			.dv_tag2{
+				display: inline
+			}
+		</style>
+	</head>
+	<body>
+		<!-- header -->
+		<header class="navbar-static-top" id="top" role="banner">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="index.html">KEEP CODING</a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Language<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="language.html">C/C++</a></li>
+									<li><a href="language.html">Java</a></li>
+								</ul>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">  
+								<select class="form-control">
+									<option value="All">All</option>
+									<option value="C/C++">C/C++</option>
+									<option value="Java">Java</option>
+								</select>
+								<input type="text" class="form-control" placeholder="Search"> 
+							</div>
+							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+						</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="mypage.html">Mypage</a></li>
+							<li><a href="#">Login</a></li>
+							<li><a href="#">Sign up</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</header>
+		<!-- end header -->
+		<main role="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<div style="font-size:40pt">Function Name</div>
+						<br>
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tabb1" data-toggle="tab">Introduction</a></li>
+							<li><a href="#tabb2" data-toggle="tab">Parameters</a></li>
+							<li><a href="#tabb3" data-toggle="tab">Return Value</a></li>
+							<li><a href="#tabb4" data-toggle="tab">Compatibility</a></li>
+							<li><a href="#tabb5" data-toggle="tab">See Also</a></li>
+						</ul>
+						<div class="tab-content my-tab-content">
+							<div class="tab-pane active" id="tabb1">標籤1的內容</div>
+							<div class="tab-pane" id="tabb2">標籤2的內容</div>
+							<div class="tab-pane" id="tabb3">標籤3的內容</div>
+							<div class="tab-pane" id="tabb4">標籤4的內容</div>
+							<div class="tab-pane" id="tabb5">標籤5的內容</div>
+						</div>
+						<br>
+						<a href="page_ce2.html"><button type="button" class="btn btn-default">Create Example</button></a>
+						<br>
+						<script type="text/javascript">
+							var amount=5;
+							var counter=1;
+							var name='Author Name';
+							var lk = new Array(amount);
+							
+							for(ctr=1;ctr<=amount;ctr++)
+							{
+							 	lk[ctr-1]=0;
+							}
+							
+							function plus(ctt)
+							{
+								//之後修正成ajax
+								lk[ctt-1]++;
+								document.getElementById('ltag'+ctt).innerHTML=lk[ctt-1];
+								/*document.getElementById('l2tag'+ctt).innerHTML='<button type=\"button\" disabled=\"disabled\"><img src=\"like.png\" width=\"21\" height=\"18\"></button>';*/
+							}
+							 
+							function keyF(ctt)
+							{
+								//之後修正成ajax
+								document.getElementById('dsc'+ctt).innerHTML=document.getElementById('dsc'+ctt).innerHTML+'<br>username:<br>&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value;
+								document.getElementById('ipt'+ctt).value='';			
+							}
+							
+							for(counter=1;counter<=amount;counter++){
+							document.write('<br><div style=\"font-size:20pt\"><TABLE width=\"715\"><TR><TD>#'+counter+' '+name+'</TD><TD align=\"right\" valign=\"bottom\"><div id=\"ltag'+counter+'\" class=\"dv_tag\" style=\"font-size:14pt\">'+lk[counter-1]+' </div><div id=\"l2tag'+counter+'\" class=\"dv_tag2\">&nbsp&nbsp<button type=\"button\" onclick=\"plus('+counter+');\"><img src=\"like.png\" width=\"21\" height=\"18\"></button></div></TD></TR></TABLE></div>');
+							 
+							document.write('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">標籤1的內容</div><div class="tab-pane" id="tabb'+counter+'2">標籤2的內容</div><div class="tab-pane" id="tabb'+counter+'3">標籤3的內容</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn"><button onclick="keyF('+counter+');" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
 
-.nav-tabs
-{
-	margin-bottom: 0;
-	width: 715px;	 
-}
-
-.tab-content
-{
-	border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	width: 715px;
-	height: 300px;
-    padding: 10px;
-	overflow: auto;
-}
-
-.input-group
-{
-	margin-top: 10px;	
-	
-	
-}
-
-.dscc
-{
-	height: 230px;	
-	overflow: auto;
-}
-
-.dv_tag{
-	 color: red;
-	 display: inline
-}
-
-.dv_tag2{
-	 display: inline
-}
-
-</style>
-
-</head>
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<div class="container">
-<div style="font-size:40pt">Function Name</div>
-<br>
-   
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#tabb1" data-toggle="tab">Introduction</a></li>
-    <li><a href="#tabb2" data-toggle="tab">Parameters</a></li>
-    <li><a href="#tabb3" data-toggle="tab">Return Value</a></li>
-    <li><a href="#tabb4" data-toggle="tab">Compatibility</a></li>
-    <li><a href="#tabb5" data-toggle="tab">See Also</a></li>
-</ul>
-
-<div class="tab-content">
-	<div class="tab-pane active" id="tabb1">標籤1的內容</div>
-	<div class="tab-pane" id="tabb2">標籤2的內容</div>
-	<div class="tab-pane" id="tabb3">標籤3的內容</div>
-	<div class="tab-pane" id="tabb4">標籤4的內容</div>
-	<div class="tab-pane" id="tabb5">標籤5的內容</div>
-</div>
-
-<br><a href="page_ce2.html"><button type="button" class="btn btn-default">Create Example</button></a><br>
-
-<script type="text/javascript">
- var amount=5;
- var counter=1;
- var name='Author Name';
- var lk = new Array(amount);
- 
- 
- for(ctr=1;ctr<=amount;ctr++)
- {
- 	 lk[ctr-1]=0;
- }
- 
- function plus(ctt)
- {
-	 //之後修正成ajax
-	 lk[ctt-1]++;
-	 document.getElementById('ltag'+ctt).innerHTML=lk[ctt-1];
-	 /*document.getElementById('l2tag'+ctt).innerHTML='<button type=\"button\" disabled=\"disabled\"><img src=\"like.png\" width=\"21\" height=\"18\"></button>';*/
- }
- 
- function keyF(ctt)
- {
-	 //之後修正成ajax
-	
-  		
-	document.getElementById('dsc'+ctt).innerHTML=document.getElementById('dsc'+ctt).innerHTML+'<br>username:<br>&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value;
-	document.getElementById('ipt'+ctt).value='';
-			
- }
- 
-
- for(counter=1;counter<=amount;counter++){
- document.write('<br><div style=\"font-size:20pt\"><TABLE width=\"715\"><TR><TD>#'+counter+' '+name+'</TD><TD align=\"right\" valign=\"bottom\"><div id=\"ltag'+counter+'\" class=\"dv_tag\" style=\"font-size:14pt\">'+lk[counter-1]+' </div><div id=\"l2tag'+counter+'\" class=\"dv_tag2\">&nbsp&nbsp<button type=\"button\" onclick=\"plus('+counter+');\"><img src=\"like.png\" width=\"21\" height=\"18\"></button></div></TD></TR></TABLE></div>');
- 
- document.write('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tabb'+counter+'1">標籤1的內容</div><div class="tab-pane" id="tabb'+counter+'2">標籤2的內容</div><div class="tab-pane" id="tabb'+counter+'3">標籤3的內容</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn"><button onclick="keyF('+counter+');" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
-
- }
- 
-</script>
-</div>
-</body>
+							}	
+						</script>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--  footer  -->
+		<footer class="my-footer">
+			<div class="container">
+				<p>Term Project</p>
+			</div>
+		</footer>
+		<!--  end footer  -->
+	</body>
 </html>
 
 
