@@ -59,8 +59,8 @@
                 <option value="Java">Java</option>
               </select>
               <input type="text" class="form-control" placeholder="Search">
-              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
             </div>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="mypage.html">Mypage</a></li>
@@ -123,7 +123,6 @@
               document.write('<br><div style=\"font-size:20pt\"><TABLE width=\"715\"><TR><TD>#'+counter+' '+name+'</TD><TD align=\"right\" valign=\"bottom\"><div id=\"ltag'+counter+'\" class=\"dv_tag\" style=\"font-size:14pt\">'+lk[counter-1]+' </div><div id=\"l2tag'+counter+'\" class=\"dv_tag2\">&nbsp&nbsp<button type=\"button\" onclick=\"plus('+counter+');\"><img src=\"like.png\" width=\"21\" height=\"18\"></button></div></TD></TR></TABLE></div>');
 
               document.write('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">標籤1的內容</div><div class="tab-pane" id="tabb'+counter+'2">標籤2的內容</div><div class="tab-pane" id="tabb'+counter+'3">標籤3的內容</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn"><button onclick="keyF('+counter+');" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
-
             }
           </script>
         </div>
