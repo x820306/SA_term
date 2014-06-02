@@ -21,4 +21,5 @@
 	border-bottom: 1px solid #ddd;
 	height: 300px;
 	padding: 10px;
+	overflow: auto;
 }
