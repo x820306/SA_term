@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/mycss.css" rel="stylesheet"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script> 
+<title>Search Result</title>
+<style type="text/css">
+.panel-default
+{
+	height: 200px;
+	width: 100%;	
+}
+.input-group
+{
+	width: 100%;	
+}
+#btn1
+{
+	width: 60px;
+}
+.Intr
+{
+	height: 120px;
+	overflow: auto;
+}
+.mor
+{
+	margin-left: 90%;	
+}
+</style>
+<script type="text/javascript">
+ var search_target='C';
+ 
+ function set_target(ctr)
+ {
+	 if(ctr==1)
+	 {
+		 search_target='C';
+		 document.getElementById('btn1').innerHTML='C<span class="caret"></span>';
+	 }else if(ctr==2)
+	 {
+		 search_target='C++';
+		 document.getElementById('btn1').innerHTML='C++<span class="caret"></span>';
+	 }else if(ctr==3)
+	 {
+		 search_target='C#';
+		 document.getElementById('btn1').innerHTML='C#<span class="caret"></span>';
+	 }else if(ctr==4)
+	 {
+		 search_target='JAVA';
+		 document.getElementById('btn1').innerHTML='JAVA<span class="caret"></span>';
+	 }
+ }
+ 
+ function to_search()
+ {
+	 
+	 
+ }
+</script>
+</head>
+<body>
+<header class="navbar-static-top" id="top" role="banner">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">KEEP CODING</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Language<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="language.html">C/C++</a></li>
+                  <li><a href="language.html">Java</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <select class="form-control">
+                  <option value="All">All</option>
+                  <option value="C/C++">C/C++</option>
+                  <option value="Java">Java</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Search">  
+              </div>
+              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="mypage.html">Mypage</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Sign up</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+
+
+<main role="main">
+
+<div class="container">
+<div class="row">
+<div class="col-md-9">
+<div style="font-size:40pt">Search Reasult</div>
+
+<br>
+	
+    <div class="input-group">
+      <input type="text" class="form-control">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="to_search();">Go!</button>
+        <button id="btn1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">C<span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right">
+          <li onclick="set_target(1);"><a herf="">C</a></li>
+          <li onclick="set_target(2);"><a herf="">C++</a></li>
+          <li onclick="set_target(3);"><a herf="">C#</a></li>
+          <li onclick="set_target(4);"><a herf="">JAVA</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+    </div><!-- /input-group -->
+    
+<br>
+
+<script type="text/javascript">
+ var amount=5; 
+ var counter;
+ if(amount>0){
+ 	document.write('<div style="font-size:20pt">There are '+amount+' results.</div>');}
+ else{
+	document.write('<div style="font-size:20pt">No reasult is found!</div>');}
+	
+	for(counter=1;counter<=amount;counter++)
+	{
+		document.write('<br><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Function Name</h3></div><div class="panel-body"><div class="Intr">content</div><div class="mor"><a href="page_f2.html">more...</a></div></div></div>');
+	}
+</script>
+	
+</div>
+<div class="col-md-3">
+</div>
+</div>
+</div>
+</main>
+<footer class="my-footer">
+      <div class="container">
+        <p>Term Project</p>
+      </div>
+</footer>
+</body>
+</html>

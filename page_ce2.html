@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/mycss.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<title>Create/Edit Example</title>
+<style type="text/css">
+.panel-default
+{
+	height: 300px;
+}
+
+.layer2
+{
+	margin-left:8px;
+	margin-top: 6px;	
+}
+
+.tarea
+{
+	width: 100%;
+	height: 259px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+.tarea2
+{
+	width: 100%;
+	height: 225px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar-static-top" id="top" role="banner">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">KEEP CODING</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Language<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="language.html">C/C++</a></li>
+                  <li><a href="language.html">Java</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <select class="form-control">
+                  <option value="All">All</option>
+                  <option value="C/C++">C/C++</option>
+                  <option value="Java">Java</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="mypage.html">Mypage</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Sign up</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+
+
+<main role="main">
+
+<div class="container">
+<div class="row">
+<div class="col-md-9">
+<div style="font-size:40pt">Create/Edit Example</div>
+<br>
+<form name="f1" action="" method="post">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Description</h3>
+  </div>
+  <textarea class="tarea" name="desN"></textarea>
+</div>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Code</h3>
+  </div>
+  <textarea class="tarea" name="codN"></textarea>
+</div>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Output</h3>
+  </div>
+  <textarea class="tarea2" name="outN"></textarea>
+  <div class="layer2"><input type="File" name="YouFile"></div>
+</div>
+<div align=center style="width:100%;">
+<button type="button" class="btn btn-default" onClick="document.f1.submit();">Submit</button>
+</div>
+</div>
+<div class="col-md-3">
+</div>
+</div>
+</div>
+<br>
+<br>
+</main>
+
+</body>
+</html>
