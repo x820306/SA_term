@@ -6,6 +6,8 @@
     <link href="css/mycss.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- bootstrap -->
@@ -67,7 +69,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="mypage.html">Mypage</a></li>
-              <li><a href="#">Login</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
               <li><a href="#">Sign up</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -95,32 +97,32 @@
       </div>
       <div class="container">
         <div class="row my-padding">
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/c.png" class="img-rounded" alt="C/C++">
             </a>
           </div>
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/java.png" class="img-rounded" alt="Java">
             </a>
           </div>
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/php.png" class="img-rounded" alt="PHP">
             </a>
           </div>
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/nodejs.png" class="img-rounded" alt="Nodejs">
             </a>
           </div>
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/csharp.png" class="img-rounded" alt="Csharp">
             </a>
           </div>
-          <div class="col-xs-6 col-md-2">
+          <div class="col-md-2">
             <a href="language.html">
               <img src="image/javascript.png" class="img-rounded" alt="JavaScript">
             </a>
@@ -133,5 +135,37 @@
         <p>Term Project</p>
       </div>
     </footer>
+    <!-- Login Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body text-center">
+
+            <a href="#">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i></button>
+                <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
+              </div>
+            </a>
+            <br>
+
+            <a href="#">
+              <div class="btn-group">
+                <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
+                <button type="button" class="btn btn-success btn-lg">Login with <b>Google</b></button>
+              </div>
+            </a>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- Login Modal -->
   </body>
 </html>
