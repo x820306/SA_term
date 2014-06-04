@@ -70,7 +70,6 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="mypage.html">Mypage</a></li>
               <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
-              <li><a href="#">Sign up</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -137,29 +136,30 @@
     </footer>
     <!-- Login Modal -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title" id="myModalLabel">Login</h4>
           </div>
-          <div class="modal-body text-center">
-
-            <a href="#">
-              <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i></button>
-                <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
-              </div>
-            </a>
+          <div class="modal-body">
+            <div class="btn-toolbar">
+              <a href="#">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
+                  <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
+                </div>
+              </a>
+            </div>
             <br>
-
-            <a href="#">
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
-                <button type="button" class="btn btn-success btn-lg">Login with <b>Google</b></button>
-              </div>
-            </a>
-
+            <div class="btn-toolbar">
+              <a href="#">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
+                  <button type="button" class="btn btn-success btn-lg">Login with <b>Google+</b></button>
+                </div>
+              </a>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
