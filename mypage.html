@@ -2,26 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Language - KEEP CODING</title>
+    <title>Mypage - KEEP CODING</title>
+    <!-- mycss -->
     <link href="css/mycss.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- scrollTo -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <!-- affix -->
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $('#navbar').affix({
-        offset: {
-          top: $("#navbar").offset().top
-        }
-      });
-    });
-    </script>
   </head>
   <body data-spy="scroll" data-target="#navbar">
     <header class="navbar-static-top" id="top" role="banner">
@@ -69,8 +60,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="mypage.html">Mypage</a></li>
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Sign up</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -259,5 +249,38 @@
         <p>Term Project</p>
       </div>
     </footer>
+    <!-- Login Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <div class="btn-toolbar">
+              <a href="#">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
+                  <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
+                </div>
+              </a>
+            </div>
+            <br>
+            <div class="btn-toolbar">
+              <a href="#">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
+                  <button type="button" class="btn btn-success btn-lg">Login with <b>Google+</b></button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- Login Modal -->
   </body>
 </html>
