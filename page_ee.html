@@ -30,7 +30,8 @@
 	
 	</style>
 
-<title>Create Example</title>
+
+<title>Edit Example</title>
 </head>
 
 <body>
@@ -94,7 +95,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-9">
-<div style="font-size:40pt">Create Example</div>
+<div style="font-size:40pt">Edit Example</div>
 <br>
 <form name="example" id="exp" action="/example/create" method="post">
 
@@ -102,7 +103,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">Description</h3>
   </div>
-  <textarea class="tarea" name="Description"></textarea>
+  <textarea class="tarea" name="Description" id="t1"></textarea>
 </div>
 <br>
 
@@ -110,7 +111,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">Code</h3>
   </div>
-  <textarea class="tarea" name="Code"></textarea>
+  <textarea class="tarea" name="Code" id="t2"></textarea>
 </div>
 <br>
 
@@ -118,11 +119,12 @@
   <div class="panel-heading">
     <h3 class="panel-title">Output</h3>
   </div>
-  <textarea class="tarea" name="Output"></textarea>
+  <textarea class="tarea" name="Output" id="t3"></textarea>
 </div>
 <div id="hidden">
-<input type="hidden" name="CreatedBy" value="">
-<input type="hidden" name="ApiID" value="">
+<input type="hidden" name="CreatedBy" id="t4">
+<input type="hidden" name="ApiID" id="t5">
+<input type="hidden" name="id" id="t6">
 </div>
 <div align=center style="width:100%;">
 <button type="button" class="btn btn-default" onClick="Submit();">Submit</button>
@@ -137,38 +139,32 @@
 </main>
  <script type="text/javascript"> 
  
-                
-				var apid=$.url.param("apiID");
-				
-				 function lgt()
+   var eid=$.url.param("eid");
+   
+   function lgt()
    {
 	   $.cookie('cookie', null);
    }
    
    function Submit()
-   {
-	     var apid2=$.url.param("apiID");
-		 
+   {	 
 		 $.ajax({
-                url: '/example/create',
+                url: '/example/update',
 				 async: false,
                 data:$('#exp').serialize(),
                 type:"POST",
                 dataType:'text',
 
                 success: function(msg){
-                    document.location.href='/page_f2.html?id='+apid2;
+                   document.location.href='/mypage.html';
                 },
 
                  error:function(){ 
                     alert('submit fail'); 
                  }
             }); 
-	  
-	  
-	  
 	  }
-				
+	  
 				 $.ajax(
 				{ url: '/isAuthenticated',
  					 type: 'GET',
@@ -184,8 +180,50 @@
 						 $.cookie('cookie',usrID);
 						 cok=$.cookie('cookie');
 						}
-					
-						document.getElementById('hidden').innerHTML='<input type="hidden" name="CreatedBy" value="'+cok+'"><input type="hidden" name="ApiID" value="'+apid+'">';
+						
+						$.ajax(
+				{ url: 'example/showAllExamplesByUser?id='+cok,
+ 					 type: 'GET',
+					 async: false,
+	  				 dataType: 'json',
+                     success: function(Jdata20) {
+						 k1=Jdata20.examples.length;
+						 k2=k1-1;
+						 
+						 if(k1==0)
+						 {
+							 alert("You are not the author.");
+						     document.location.href="/index.html";
+						 }
+						 
+						 for(ctr=0;ctr<k1;ctr++)
+						 {
+							 if(Jdata20.examples[ctr]._id==eid)
+							 { 
+								 document.getElementById('t1').value=Jdata20.examples[ctr].Description;
+								 document.getElementById('t2').value=Jdata20.examples[ctr].Code;
+								 document.getElementById('t3').value=Jdata20.examples[ctr].Output;
+								 document.getElementById('t4').value=Jdata20.examples[ctr].CreatedBy;
+								 document.getElementById('t5').value=Jdata20.examples[ctr].ApiID;
+								 document.getElementById('t6').value=eid;
+								 break;
+							 }
+							 
+							 if(ctr==k2)
+							 {
+								 alert("You are not the author.");
+						     	 document.location.href="/index.html";
+							 }
+							 
+						 }
+    					
+                     },
+                     error: function() {
+                          
+                     }
+                 });
+						
+						
 						
                      
 					 },

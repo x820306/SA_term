@@ -3,14 +3,39 @@
 <head>
   <meta charset="utf-8">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="css/mycss.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.url.min.js"></script>
+  <script type="text/javascript" src="js/json.js"></script>
+  <script type="text/javascript" src="js/json2.js"></script>
+  <script type="text/javascript" src="js/jquery2.cookie.js"></script>
 <title>Function</title>
+  <style type="text/css">
+    .igrp
+    {
+      margin-top: 12px;	
+    }
+    .dscc
+    {
+      height: 230px;	
+      overflow: auto;
+    }
+    .dv_tag{
+      color: red;
+      display: inline
+    }
+    .dv_tag2{
+      display: inline
+	  
+    }
+	
+  </style>
+
 </head>
 <body>
+
   <header class="navbar-static-top" id="top" role="banner">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -55,8 +80,9 @@
               </form>
             </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="mypage.html">Mypage</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+            <li id="mp"><a href="mypage.html">Mypage</a></li>
+            <li id="in_out"><a href="login.html">Login</a></li>
+            <li><a href="#">Sign up</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -65,8 +91,14 @@
   <main role="main">
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
-          <div style="font-size:40pt">Function Name</div>
+        <div class="col-md-9" id="col9">
+          <div style="font-size:40pt" id="fN"></div>
+          <TABLE width=100%>
+          <TR><TD align="right">
+          <div style="font-size:20pt" id="fN2" class="dv_tag">0</div>
+          <div style="font-size:15pt" id="fN3" class="dv_tag2">&nbsp Need</div>
+          </TD></TR>
+          <TABLE>
           <br>
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tabb1" data-toggle="tab">Introduction</a></li>
@@ -76,46 +108,25 @@
             <li><a href="#tabb5" data-toggle="tab">See Also</a></li>
           </ul>
           <div class="tab-content my-tab-content">
-            <div class="tab-pane active" id="tabb1">標籤1的內容</div>
-            <div class="tab-pane" id="tabb2">標籤2的內容</div>
-            <div class="tab-pane" id="tabb3">標籤3的內容</div>
-            <div class="tab-pane" id="tabb4">標籤4的內容</div>
-            <div class="tab-pane" id="tabb5">標籤5的內容</div>
+            <div class="tab-pane active" id="tabb1"></div>
+            <div class="tab-pane" id="tabb2"></div>
+            <div class="tab-pane" id="tabb3"></div>
+            <div class="tab-pane" id="tabb4"></div>
+            <div class="tab-pane" id="tabb5"></div>
           </div>
           <br>
-          <a href="page_ce2.html"><button type="button" class="btn btn-default">Create Example</button></a>
+          <TABLE>
+          <TR>
+          <TD id="ceBtn">
+			<a><button type="button" style="width: 150px;" class="btn btn-default" onclick="alert('Please login!');">Create Example</button></a> 
+           </TD>
+           <TD id="neBtn">
+           &nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="alert('Please login!');">Need Example</button></a>
+           </TD>
+           <TR>
+           </TABLE>
           <br>
-          <script type="text/javascript">
-            var amount=5;
-            var counter=1;
-            var name='Author Name';
-            var lk = new Array(amount);
-
-            for(ctr=1;ctr<=amount;ctr++)
-            {
-              lk[ctr-1]=0;
-            }
-            function plus(ctt)
-            {
-              //之後修正成ajax
-              lk[ctt-1]++;
-              document.getElementById('ltag'+ctt).innerHTML=lk[ctt-1];
-              /*document.getElementById('l2tag'+ctt).innerHTML='<button type=\"button\" disabled=\"disabled\"><img src=\"like.png\" width=\"21\" height=\"18\"></button>';*/
-            }
-
-            function keyF(ctt)
-            {
-            //之後修正成ajax
-              document.getElementById('dsc'+ctt).innerHTML=document.getElementById('dsc'+ctt).innerHTML+'<br>username:<br>&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value;
-              document.getElementById('ipt'+ctt).value='';
-            }
-
-            for(counter=1;counter<=amount;counter++){
-              document.write('<br><div style="font-size:20pt"><TABLE width=100%><TR><TD>#'+counter+' '+name+'</TD><TD align="right" valign="bottom"><div id="ltag'+counter+'" class="dv_tag" style="font-size:14pt">'+lk[counter-1]+' </div><div id="l2tag'+counter+'" class="dv_tag2">&nbsp&nbsp<button type="button" onclick="plus('+counter+');" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button></div></TD></TR></TABLE></div>');
-
-              document.write('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">標籤1的內容</div><div class="tab-pane" id="tabb'+counter+'2">標籤2的內容</div><div class="tab-pane" id="tabb'+counter+'3">標籤3的內容</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn"><button onclick="keyF('+counter+');" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
-            }
-          </script>
+          
         </div>
         <div class="col-md-3">
         </div>
@@ -127,39 +138,415 @@
       <p>Term Project</p>
     </div>
   </footer>
-  <!-- Login Modal -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Login</h4>
-          </div>
-          <div class="modal-body">
-            <div class="btn-toolbar">
-              <a href="#">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
-                  <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
-                </div>
-              </a>
-            </div>
-            <br>
-            <div class="btn-toolbar">
-              <a href="#">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
-                  <button type="button" class="btn btn-success btn-lg">Login with <b>Google+</b></button>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div><!-- Login Modal -->
+  <script type="text/javascript">
+				
+			var id=$.url.param("id");
+		    var amount=5;
+            var counter=1;
+            var lk=[];
+			var de=[];
+			var co=[];
+			var ou=[];
+			var atrid=[];
+			var exmpID=[];
+            var Nnb;
+          
+			
+			function plg()
+            {
+				alert('Please Login');
+			}
+			
+			function plus2(iid,ck)
+            {
+				 $.ajax({
+                url: '/api/need',
+				async: false,
+                data:$('#nd').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+			   
+			    $.ajax(
+				 			{   url: '/api/hasneeded?id='+iid+"&user="+ck,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata27) { 
+								
+								if(Jdata27.hasneeded==true){
+									document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="minus2(\''+iid+'\',\''+ck+'\');">Not Need Anymore</button></a>';
+									
+									Nnb++;
+									document.getElementById('fN2').innerHTML=Nnb;
+									}else
+									{
+										document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="plus2(\''+iid+'\',\''+ck+'\');">Need Example</button></a>';
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+			}
+			
+			function minus2(iid,ck)
+            {
+				 $.ajax({
+                url: '/api/unneed',
+				async: false,
+                data:$('#und').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+			   
+			    $.ajax(
+				 			{   url: '/api/hasneeded?id='+iid+"&user="+ck,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata28) { 
+								
+								if(Jdata28.hasneeded==true){
+									document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="minus2(\''+iid+'\',\''+ck+'\');">Not Need Anymore</button></a>';
+									
+									}else
+									{
+										document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="plus2(\''+iid+'\',\''+ck+'\');">Need Example</button></a>';
+										
+										Nnb--;
+									document.getElementById('fN2').innerHTML=Nnb;
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+			}
+			
+			function lgt()
+   			{
+	  			 $.cookie('cookie', null);
+   			}
+			
+            function plus(ctt,ck)
+            {
+              document.getElementById('eid1').value=exmpID[ctt-1];
+	
+			  
+			  $.ajax({
+                url: '/example/like',
+				async: false,
+                data:$('#lik').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+			   
+			   				 $.ajax(
+				 			{   url: '/example/hasliked?id='+exmpID[ctt-1]+"&user="+ck,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata25) { 
+								
+								if(Jdata25.hasliked==true){
+									document.getElementById('l2tag'+ctt).innerHTML='&nbsp&nbsp<button type="button" onclick="minus('+ctt+',\''+ck+'\');" style="font-size:12pt">收回讚</button>';
+									
+									lk[ctt-1]++;
+									document.getElementById('ltag'+ctt).innerHTML=lk[ctt-1];
+									
+									}else
+									{
+										document.getElementById('l2tag'+ctt).innerHTML='&nbsp&nbsp<button type="button" onclick="plus('+ctt+',\''+ck+'\');" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button>';
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+            }
+			
+			 function minus(ctt,ck)
+            {
+            	 document.getElementById('eid2').value=exmpID[ctt-1];
+	
+			  
+			  $.ajax({
+                url: '/example/unlike',
+				async: false,
+                data:$('#ulik').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+			   
+			   	 $.ajax(
+				 			{   url: '/example/hasliked?id='+exmpID[ctt-1]+"&user="+ck,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata26) { 
+								
+								if(Jdata26.hasliked==true){
+									document.getElementById('l2tag'+ctt).innerHTML='&nbsp&nbsp<button type="button" onclick="minus('+ctt+',\''+ck+'\');" style="font-size:12pt">收回讚</button>';
+									}else
+									{
+										document.getElementById('l2tag'+ctt).innerHTML='&nbsp&nbsp<button type="button" onclick="plus('+ctt+',\''+ck+'\');" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button>';
+										
+										lk[ctt-1]--;
+									document.getElementById('ltag'+ctt).innerHTML=lk[ctt-1];
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+			
+            }
+			
+
+            function keyF(ctt,nameF)
+            {
+            
+            
+			  var conToSend=nameF+':<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value+'<br><br>';
+			  document.getElementById('cntt').value=conToSend;
+			  document.getElementById('cntt2').value=exmpID[ctt-1];
+			   
+			   $.ajax({
+                url: '/discussion/create',
+				async: false,
+                data:$('#discu').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+                     $.ajax(
+				 {   url: '/discussion/show?exampleid='+exmpID[ctt-1],
+				     async: false,
+ 					 type: 'GET',
+	  				 dataType: 'json',
+                     success: function(Jdata23) { 
+					    document.getElementById('dsc'+ctt).innerHTML='';
+						for(ctr2=0;ctr2<Jdata23.discussions.length;ctr2++){
+							
+						$('#dsc'+ctt).append(Jdata23.discussions[ctr2].Content);
+						}
+						document.getElementById('ipt'+ctt).value='';
+						
+                     },
+                     error: function() {
+                          
+                     }
+                 });
+			    
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+			  
+            }
+			
+			$.ajax(
+				{ url: '/api/showOne?id='+id,
+ 					 type: 'GET',
+					 async: false,
+	  				 dataType: 'json',
+                     success: function(Jdata) {
+    					var Lan=Jdata.Language;
+	                    var Int=Jdata.Introduction;
+						var Fun=Jdata.FunctionName;
+	                    var Par=Jdata.Parameter;
+						var Ret=Jdata.ReturnValue;
+	                    var See=Jdata.SeeAlso;
+						var Com=Jdata.Compatibility;
+						Nnb=Jdata.NeedNumber;
+						
+						document.getElementById('fN').innerHTML=Fun;
+			            document.getElementById('fN2').innerHTML=Nnb;
+						document.getElementById('tabb1').innerHTML=Int;
+						document.getElementById('tabb2').innerHTML=Par;
+						document.getElementById('tabb3').innerHTML=Ret;
+						document.getElementById('tabb4').innerHTML=See;
+						document.getElementById('tabb5').innerHTML=Com;
+						
+                     },
+                     error: function() {
+                          
+                     }
+                 });
+			
+			
+			$.ajax(
+				{ url: 'example/show/?apiid='+id,
+ 					 type: 'GET',
+					 async: false,
+	  				 dataType: 'json',
+                     success: function(Jdata3) {
+						amount=Jdata3.examples.length;
+						
+						
+						for(counter=0;counter<amount;counter++){
+							de[counter]=Jdata3.examples[counter].Description;
+							co[counter]=Jdata3.examples[counter].Code;
+							ou[counter]=Jdata3.examples[counter].Output;
+							atrid[counter]=Jdata3.examples[counter].CreatedBy;	
+							exmpID[counter]=Jdata3.examples[counter]._id;
+							lk[counter]=Jdata3.examples[counter].LikeNumber;
+						}
+						
+						 for(counter=1;counter<=amount;counter++){
+							
+               $('#col9').append('<br><div style="font-size:20pt"><TABLE width=100%><TR><TD>#'+counter+' '+atrid[counter-1].DisplayName+'</TD><TD align="right" valign="bottom"><div id="ltag'+counter+'" class="dv_tag" style="font-size:14pt">'+lk[counter-1]+' </div><div id="l2tag'+counter+'" class="dv_tag2">&nbsp&nbsp<button type="button" onclick="plg();" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button></div></TD></TR></TABLE></div>');
+
+              $('#col9').append('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">'+de[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'2">'+co[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'3">'+ou[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group igrp"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn" id="span'+counter+'"><button onclick="plg();" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
+            }
+                     },
+                     error: function() {
+                          
+                     }
+                 });
+				 
+				 
+				 
+				 for(counter=1;counter<=amount;counter++){
+					 
+				 $.ajax(
+				 {   url: '/discussion/show?exampleid='+exmpID[counter-1],
+				     async: false,
+ 					 type: 'GET',
+	  				 dataType: 'json',
+                     success: function(Jdata22) { 
+						for(ctr=0;ctr<Jdata22.discussions.length;ctr++){
+							
+						$('#dsc'+counter).append(Jdata22.discussions[ctr].Content);
+						}
+                     },
+                     error: function() {
+                          
+                     }
+                 });
+
+			     }
+				 
+				 
+				//?id=538cac1681a6e4200cf10c0b
+				
+				
+				 
+				 $.ajax(
+				{ url: '/isAuthenticated',
+				     async: false,
+ 					 type: 'GET',
+	  				 dataType: 'json',
+                     success: function(Jdata2) {
+    					var usrID=Jdata2._id;
+						var usrName=Jdata2.DisplayName;
+						var tobeEnc='page_ce2.html?apiID='+id;
+						
+						document.getElementById('ceBtn').innerHTML='<a href="'+tobeEnc+'"><button type="button" style="width: 150px;" class="btn btn-default">Create Example</button></a>';
+						
+						document.getElementById('in_out').innerHTML='<a href="logout" onclick="lgt();">Logout</a>';
+						
+						document.getElementById('mp').innerHTML='<a href="mypage.html">'+usrName+'</a>';
+						
+						var cok=$.cookie('cookie');
+						 if(cok==null){
+						 $.cookie('cookie',usrID); 
+						 cok=$.cookie('cookie');
+						 }
+						 
+						   $.ajax(
+				 			{   url: '/api/hasneeded?id='+id+"&user="+cok,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata26) { 
+								
+								if(Jdata26.hasneeded==true){
+									document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="minus2(\''+id+'\',\''+cok+'\');">Not Need Anymore</button></a>';
+									}else
+									{
+										document.getElementById('neBtn').innerHTML='&nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="plus2(\''+id+'\',\''+cok+'\');">Need Example</button></a>';
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+							
+						for(counter=1;counter<=amount;counter++)
+						{
+							
+							  $.ajax(
+				 			{   url: '/example/hasliked?id='+exmpID[counter-1]+"&user="+cok,
+							    async: false,
+				     			type: 'GET',
+	  				 			dataType: 'json',
+                     			success: function(Jdata24) { 
+								
+								if(Jdata24.hasliked==true){
+									document.getElementById('l2tag'+counter).innerHTML='&nbsp&nbsp<button type="button" onclick="minus('+counter+',\''+cok+'\');" style="font-size:12pt">收回讚</button>';
+									}else
+									{
+										document.getElementById('l2tag'+counter).innerHTML='&nbsp&nbsp<button type="button" onclick="plus('+counter+',\''+cok+'\');" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button>';
+																				}		
+															
+                    			 },
+                     			error: function() {
+                     			}
+                 				});
+							
+							
+							document.getElementById('span'+counter).innerHTML='<button onclick="keyF('+counter+',\''+usrName+'\');" class="btn btn-default" type="button">輸入</button>';
+						
+						}
+						
+						 
+						 
+						 $('#col9').append('<form name="discussion" id="discu" action="/discussion/create" method="post"><input id="cntt" type="hidden" name="Content" value=""><input id="cntt2" type="hidden" name="ExampleID" value=""><input type="hidden" name="CreatedBy" value="'+cok+'"></form>');
+						  $('#col9').append('<form name="like" id="lik" action="/example/like" method="post"><input id="eid1" type="hidden" name="id" value=""><input id="uid1" type="hidden" name="user" value="'+cok+'"></form>');
+						  
+						   $('#col9').append('<form name="unlike" id="ulik" action="/example/unlike" method="post"><input id="eid2" type="hidden" name="id" value=""><input id="uid2" type="hidden" name="user" value="'+cok+'"></form>');
+						   
+						   $('#col9').append('<form name="need" id="nd" action="/api/need" method="post"><input id="aid1" type="hidden" name="id" value="'+id+'"><input id="uid3" type="hidden" name="user" value="'+cok+'"></form>');
+						  
+						   $('#col9').append('<form name="unneed" id="und" action="/api/unneed" method="post"><input id="aid2" type="hidden" name="id" value="'+id+'"><input id="uid4" type="hidden" name="user" value="'+cok+'"></form>');
+						 
+                     },
+                     error: function() {
+                     }
+                 });
+		  </script>
 </body>
 </html>
 
