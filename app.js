@@ -8,6 +8,7 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.session({ secret: 'thisisasaproject' }));
+  app.set('view engine', 'ejs');
 });
 
 var passport = require('passport');
@@ -188,6 +189,10 @@ app.get('/api/list', api.list);
 app.post('/api/create', api.create);
 //顯示單一語言的所有api，例如：/api/show?Language=Cplusplus
 app.get('/api/show/:Language?', api.show);
+//render ejs
+app.get('/api/render/:Language?', function(req, res){
+  res.render('page_lang', { Language: req.query.Language });
+});
 //傳入api id，顯示該筆api詳細資料
 app.get('/api/showOne/:id?', api.showOne);
 //更新api，需要有個欄位是id，記錄該筆api的id
