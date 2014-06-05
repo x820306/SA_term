@@ -13,9 +13,27 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- affix -->
+    <!-- script -->
     <script type="text/javascript">
       $(document).ready(function(){
+        /* check login */
+        $.get("/isAuthenticated", function(data, status){
+          /* data:{
+               _id
+               LoginBy
+               DisplayName
+               Identifier
+               _v
+               Created
+             }*/
+          //$.cookie("username", data.DisplayName);
+          if(data != ""){
+            $("#login_btn").addClass("hidden");
+            $("#mypage_btn").removeClass("hidden");
+            $("#logout_btn").removeClass("hidden");        
+          }
+        });
+        /* affix */        
         $('#navbar').affix({
           offset: {
             top: $("#navbar").offset().top
@@ -69,8 +87,9 @@
                 </form>
               </div>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="mypage.html">Mypage</a></li>
-              <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+              <li id="mypage_btn" class="hidden"><a href="mypage.html">Mypage</a></li>              
+              <li id="logout_btn" class="hidden"><a href="/logout">Logout</a></li>
+              <li id="login_btn"><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -238,7 +257,7 @@
           </div>
           <div class="modal-body">
             <div class="btn-toolbar">
-              <a href="#">
+              <a href="http://127.0.0.1.xip.io:5000/auth/facebook">
                 <div class="btn-group">
                   <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
                   <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
@@ -247,7 +266,7 @@
             </div>
             <br>
             <div class="btn-toolbar">
-              <a href="#">
+              <a href="http://127.0.0.1:5000/auth/google">
                 <div class="btn-group">
                   <button type="button" class="btn btn-success btn-lg"><i class="fa fa-google-plus"></i></button>
                   <button type="button" class="btn btn-success btn-lg">Login with <b>Google+</b></button>

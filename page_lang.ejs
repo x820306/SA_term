@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>KEEP CODING</title>
+    <title>Language - KEEP CODING</title>
     <!-- mycss -->
     <link href="css/mycss.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -13,8 +13,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- scrollTo -->
-    <script src="js/jquery.scrollTo.min.js"></script>
     <!-- script -->
     <script type="text/javascript">
       $(document).ready(function(){
@@ -35,14 +33,41 @@
             $("#logout_btn").removeClass("hidden");        
           }
         });
-        /* scroll to #language */
-        $("#start").click(function(){
-          $('body').scrollTo("#language", 800);
+        /* get api list & display navbar */
+        $.get("/api/show?Language=" + <%= Language %>, function(data, status){
+          /* data:{
+               apis[]
+             }*/
+          data.apis.forEach(function(value, index){
+            $("#api_list").append("<li><a href='#"+value.FunctionName+"'>"+vlaue.FunctionName+"</a></li>");
+
+            $("#api_list").append('
+            <div id="'+value.FunctionName+'">
+              <h2><a href="'+/* page_f */'">'+value.FunctionName+'</a></h2>
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#definition9" data-toggle="tab">Definition</a></li>
+                <li><a href="#usage9" data-toggle="tab">Usage</a></li>
+                <li><a href="#example9" data-toggle="tab">Example</a></li>
+              </ul>
+              <div class="tab-content my-tab-content">
+                <div class="tab-pane active" id="definition9">a</div>
+                <div class="tab-pane" id="usage9">b</div>
+                <div class="tab-pane" id="example9">c</div>
+              </div>
+            </div>
+            ');
+          });
+        });
+        /* affix */        
+        $('#navbar').affix({
+          offset: {
+            top: $("#navbar").offset().top
+          }
         });
       });
     </script>
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#navbar">
     <header class="navbar-static-top" id="top" role="banner">
       <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -68,85 +93,51 @@
               </li>
             </ul>
             <div class="col-md-6">
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search"> 
-                    <div class="input-group-btn">
-                      <select class="form-control">
-                        <option value="All">All</option>
-                        <option value="C/C++">C/C++</option>
-                        <option value="Java">Java</option>
-                      </select>
-                    </div>
-                    <div class="input-group-btn">
-                      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                    </div>
-                  </div><!-- /.input-group -->
-                </div><!-- /.form-group -->
-              </form>
-            </div><!-- /.col-md-6 -->
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search"> 
+                      <div class="input-group-btn">
+                        <select class="form-control">
+                          <option value="All">All</option>
+                          <option value="C/C++">C/C++</option>
+                          <option value="Java">Java</option>
+                        </select>
+                      </div>
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                      </div>
+                    </div><!-- /.input-group -->
+                  </div><!-- /.form-group -->
+                </form>
+              </div>
             <ul class="nav navbar-nav navbar-right">
               <li id="mypage_btn" class="hidden"><a href="mypage.html">Mypage</a></li>              
               <li id="logout_btn" class="hidden"><a href="/logout">Logout</a></li>
               <li id="login_btn"><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
+        </div><!-- /.container-fluid -->
       </nav>
     </header>
     <main role="main">
-      <div class="jumbotron">
+      <div class="my-padding" id="banner">
         <div class="container">
-          <h1>Welcome to<br>KEEP CODING!</h1>
-          <h2>
-            We Are<br>
-            A Entrance Leading You<br>
-            Into The Coding World!<br>
-          </h2>
-          <p><a class="btn btn-primary btn-lg" role="button" id="start">Start</a></p>
-        </div><!-- /.container -->
-      </div><!-- /.jumbotron -->
-      <div id="language" class="container my-padding">
-        <h1>Select A Language</h1>
-        <h3>
-          Click The Icon Of The Prgramming Language<br>
-          And Enjoy The Coding World!
-        </h3>
+          <h1>Programming Language</h1>
+          <p>Somrthing about the language.</p>
+        </div>
       </div>
       <div class="container">
-        <div class="row my-padding">
-          <div class="col-md-2">
-            <a href="language.html">
-            <!-- <a href="page_lang?lang="> -->
-              <img src="image/c.png" class="img-rounded" alt="C/C++">
-            </a>
+        <div class="row">
+          <div class="col-md-9" id="function_part">  
           </div>
-          <div class="col-md-2">
-            <a href="language.html">
-              <img src="image/java.png" class="img-rounded" alt="Java">
-            </a>
-          </div>
-          <div class="col-md-2">
-            <a href="language.html">
-              <img src="image/php.png" class="img-rounded" alt="PHP">
-            </a>
-          </div>
-          <div class="col-md-2">
-            <a href="language.html">
-              <img src="image/nodejs.png" class="img-rounded" alt="Nodejs">
-            </a>
-          </div>
-          <div class="col-md-2">
-            <a href="language.html">
-              <img src="image/csharp.png" class="img-rounded" alt="Csharp">
-            </a>
-          </div>
-          <div class="col-md-2">
-            <a href="language.html">
-              <img src="image/javascript.png" class="img-rounded" alt="JavaScript">
-            </a>
-          </div>
+          <div class="col-md-3">
+            <div id="navbar" class="my-sider">
+              <ul class="nav nav-pills nav-stacked"  id="function_list">
+                <li><a href="#top">TOP</a></li>
+              </ul>
+            </div>
+          </div>  
         </div>
       </div>
     </main>
