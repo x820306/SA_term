@@ -98,11 +98,13 @@
     <div class="input-group" id="igrp2">
       <input id="txt" type="text" class="form-control">
       <div id="btn1" class="input-group-btn">
-        <button class="btn btn-default" type="button" onclick="to_search(1);">Go!</button>
-        <button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">C/C++<span class="caret"></span></button>
+        <button class="btn btn-default" type="button" onclick="to_search();">Go!</button>
+        <button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">        <span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
-          <li onclick="set_target(1);"><a herf="">C/C++</a></li>
-          <li onclick="set_target(2);"><a herf="">JAVA</a></li>
+          <li onclick="set_target(1);"><input id="chh1" type="hidden" value="C"><a herf="" id="cx1">C</a></li>
+          <li onclick="set_target(2);"><input id="chh2" type="hidden" value="Cplusplus"><a herf="" id="cx2">C++</a></li>
+          <li onclick="set_target(3);"><input id="chh3" type="hidden" value="JAVA"><a herf="" id="cx3">JAVA</a></li>
+          <!-- /新增語言只要加在這裡就可以了,比如<li onclick="set_target(4);"><input id="chh4" type="hidden" value="NODEJS"><a herf="" id="cx4">Node.js</a></li>，chh4的value是要送去給app.js的(不能帶符號)，cx4的innerHTML則是顯示在畫面上用 -->
         </ul>
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
@@ -128,7 +130,8 @@
 var amount=5; 
 var counter;
 				
-var lan=$.url.param("lan");
+var lan0=$.url.param("lan");
+var lan;
 var cnt=$.url.param("cnt");
 
 
@@ -142,24 +145,17 @@ var fid=[];
 	   $.cookie('cookie', null);
   }
  
- function set_target(ctr)
+ function set_target(cxx)
  {
-	 if(ctr==1)
-	 {
-		 document.getElementById('btn1').innerHTML='<button class="btn btn-default" type="button" onclick="to_search(1);">Go!</button><button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">C/C++<span class="caret"></span></button><ul class="dropdown-menu pull-right"><li onclick="set_target(1);"><a herf="">C/C++</a></li><li onclick="set_target(2);"><a herf="">JAVA</a></li></ul>';
-	 }else if(ctr==2)
-	 {
-		 document.getElementById('btn1').innerHTML='<button class="btn btn-default" type="button" onclick="to_search(2);">Go!</button><button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">JAVA<span class="caret"></span></button><ul class="dropdown-menu pull-right"><li onclick="set_target(1);"><a herf="">C/C++</a></li><li onclick="set_target(2);"><a herf="">JAVA</a></li></ul>';
-	 }
+	lan=document.getElementById('chh'+cxx).value; 
+
+document.getElementById('btn2').innerHTML=document.getElementById('cx'+cxx).innerHTML+'<span class="caret"></span>';
  }
  
- function to_search(chs)
+ function to_search()
  {
-	  
-	  if(chs==1)
-	 {
 		  $.ajax({   
-		  				url: '/api/search?keyword='+document.getElementById("txt").value+'&Language=C',
+		  				url: '/api/search?keyword='+document.getElementById("txt").value+'&Language='+lan,
 					    async: false,
 				     	type: 'GET',
 	  				 	dataType: 'json',
@@ -187,59 +183,21 @@ var fid=[];
 															
                     			 },
                      	error: function() {
+							alert('submit error!')
                      			}
            });
-		 
-		 
-	 }else if(chs==2)
-	 {
-		  $.ajax({   
-		  				url: '/api/search?keyword='+document.getElementById("txt").value+'&Language=JAVA',
-					    async: false,
-				     	type: 'GET',
-	  				 	dataType: 'json',
-                     	success: function(Jdata4) { 
-						
-						amount=Jdata4.apis.length;
-						for(counter=0;counter<amount;counter++)
-						{
-							fn[counter]=Jdata4.apis[counter].FunctionName;
-							intr[counter]=Jdata4.apis[counter].Introduction;
-							fid[counter]=Jdata4.apis[counter]._id;
-						}
-						
-						document.getElementById('col9').innerHTML='';
-						
-								if(amount>0){
- 	$('#col9').append('<div style="font-size:20pt"><br>'+amount+' result</div>');}
- else{
-	$('#col9').append('<div style="font-size:20pt"><br>No reasult is found!</div>');}
-	
-	for(counter=0;counter<amount;counter++)
-	{
-		$('#col9').append('<br><div class="panel panel-default pd"><div class="panel-body"><div class="mor" style="font-size:25px;color:#0000D1;"><a href="page_f2.html?id='+fid[counter]+'">'+fn[counter]+'</a></div><br><div class="Intr">'+intr[counter]+'</div></div></div>');
-	}
-															
-                    			 },
-                     	error: function() {
-                     			}
-           });
-		 
-	  } 
   }
   
   
-if(lan!='')
+lan=document.getElementById('chh1').value; 
+document.getElementById('btn2').innerHTML=document.getElementById('cx1').innerHTML+'<span class="caret"></span>';
+  
+if(lan0!='')
 {
 	document.getElementById('txt').value=cnt;
-	if(lan=='C')
-	{
-		to_search(1);
-	}else if(lan=='JAVA')
-	{
-		to_search(2);
-	}
+	lan=lan0;
 	
+    to_search();
 }
 
 				
