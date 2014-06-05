@@ -10,14 +10,15 @@
 <script type="text/javascript" src="js/jquery.url.min.js"></script>
 <script type="text/javascript" src="js/json.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
-<script type="text/javascript" src="js/jquery2.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <title>Search Result</title>
     
 	<style type="text/css">
-	.panel-default
+	.pd
 	{
 		height: 200px;
-		width: 100%;	
+		width: 100%;
+		overflow: auto;	
 	}
 	#igrp2
 	{
@@ -27,15 +28,7 @@
 	{
 		width: 80px;
 	}
-	.Intr
-	{
-		height: 120px;
-		overflow: auto;
-	}
-	.mor
-	{
-		margin-left: 90%;	
-	}
+	
 	</style>
 </head>
 <body>
@@ -183,13 +176,13 @@ var fid=[];
 						document.getElementById('col9').innerHTML='';
 						
 								if(amount>0){
- 	$('#col9').append('<div style="font-size:20pt">'+amount+' result</div>');}
+ 	$('#col9').append('<div style="font-size:20pt"><br>'+amount+' result</div>');}
  else{
-	$('#col9').append('<div style="font-size:20pt">No reasult is found!</div>');}
+	$('#col9').append('<div style="font-size:20pt"><br>No reasult is found!</div>');}
 	
 	for(counter=0;counter<amount;counter++)
 	{
-		$('#col9').append('<br><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+fn[counter]+'</h3></div><div class="panel-body"><div class="Intr">'+intr[counter]+'</div><div class="mor"><a href="page_f2.html?id='+fid[counter]+'">more...</a></div></div></div>');
+		$('#col9').append('<br><div class="panel panel-default pd"><div class="panel-body"><div class="mor" style="font-size:25px;color:#0000D1;"><a href="page_f2.html?id='+fid[counter]+'">'+fn[counter]+'</a></div><br><div class="Intr">'+intr[counter]+'</div></div></div>');
 	}
 															
                     			 },
@@ -218,13 +211,13 @@ var fid=[];
 						document.getElementById('col9').innerHTML='';
 						
 								if(amount>0){
- 	$('#col9').append('<div style="font-size:20pt">'+amount+' result</div>');}
+ 	$('#col9').append('<div style="font-size:20pt"><br>'+amount+' result</div>');}
  else{
-	$('#col9').append('<div style="font-size:20pt">No reasult is found!</div>');}
+	$('#col9').append('<div style="font-size:20pt"><br>No reasult is found!</div>');}
 	
 	for(counter=0;counter<amount;counter++)
 	{
-		$('#col9').append('<br><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">'+fn[counter]+'</h3></div><div class="panel-body"><div class="Intr">'+intr[counter]+'</div><div class="mor"><a href="page_f2.html?id='+fid[counter]+'">more...</a></div></div></div>');
+		$('#col9').append('<br><div class="panel panel-default pd"><div class="panel-body"><div class="mor" style="font-size:25px;color:#0000D1;"><a href="page_f2.html?id='+fid[counter]+'">'+fn[counter]+'</a></div><br><div class="Intr">'+intr[counter]+'</div></div></div>');
 	}
 															
                     			 },
