@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mypage - KEEP CODING</title>
+    <title></title>
     <!-- mycss -->
     <link href="/css/mycss.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -15,9 +15,12 @@
     <script src="/js/bootstrap.min.js"></script>
     <!-- cookie -->
     <script src="/js/jquery.cookie.js"></script>
+    <!-- url parameter getter -->
+    <script src="/js/jquery.url.min.js"></script>
     <!-- script -->
     <script type="text/javascript">
       $(document).ready(function(){
+        $("title").append($.url.param("Language")+" - KEEP CODING");
         /* check login */
         $.get("/isAuthenticated", function(data){
           if(data != ""){
@@ -25,7 +28,6 @@
             $("#user_name_span").append(data.DisplayName);  
             $("#login_btn").addClass("hidden");
             $("#mypage_btn").removeClass("hidden");
-            $("#whose_page").append(data.DisplayName+"`s Page");
           }
           else{
             $.cookie("username", null, {  path: '/' });
@@ -35,10 +37,26 @@
         $("#search_btn").click(function(){
           window.open("/page_search.html?lan="+$("#lang_nav").val()+"&cnt="+$("#text_nav").val(), "_self");
         });
+        /* get content */
+        $.get("/api/show?Language="+$.url.param("Language"), function(data){
+          $("#language_name").append($.url.param("Language"));
+          data.apis.forEach(function(value, index){
+            $("#api_list").append('<li><a href="#function'+index+'">'+value.FunctionName+'</a></li>');
+            $("#api_content").append('<div id="function'+index+'"><h2><a href="/page_f2.html?id='+value._id+'">'+value.FunctionName+'</a></h2><ul class="nav nav-tabs"><li class="active"><a href="#introduction'+index+'" data-toggle="tab">Introduction</a></li><li><a href="#parameter'+index+'" data-toggle="tab">Parameter</a></li><li><a href="#returnValue'+index+'" data-toggle="tab">ReturnValue</a></li><li><a href="#compatibility'+index+'" data-toggle="tab">Compatibility</a></li><li><a href="#seeAlso'+index+'" data-toggle="tab">SeeAlso</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="introduction'+index+'">'+value.Introduction+'</div><div class="tab-pane" id="parameter'+index+'">'+value.Parameter+'</div><div class="tab-pane" id="returnValue'+index+'">'+value.ReturnValue+'</div><div class="tab-pane" id="compatibility'+index+'">'+value.Compatibility+'</div><div class="tab-pane" id="seeAlso'+index+'">'+value.SeeAlso+'</div></div></div>');
+          }, "json");
+          /* affix */        
+          $('#navbar').affix({
+            offset: {
+              top: $("#navbar").offset().top
+            }
+          });
+          /* spayscroll */
+          $('body').scrollspy({ target: '#navbar' });
+        });
       });
     </script>
   </head>
-  <body data-spy="scroll" data-target="#navbar">
+  <body>
     <header class="navbar-static-top" id="top" role="banner">
       <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -106,35 +124,20 @@
     <main role="main">
       <div class="my-padding" id="banner">
         <div class="container">
-          <h1 id="whose_page"></h1>
+          <h1 id="language_name"></h1>
         </div>
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-9">
-            <h2>Your Example</h2>
-            <div id="example1">
-              <h2>example1</h2>
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#description1" data-toggle="tab">Description</a></li>
-                <li><a href="#code1" data-toggle="tab">Code</a></li>
-                <li><a href="#output1" data-toggle="tab">Output</a></li>
-                <li><a href="#discussion1" data-toggle="tab">Discussion</a></li>
-              </ul>
-              <div class="tab-content my-tab-content">
-                <div class="tab-pane active" id="description1">a</div>
-                <div class="tab-pane" id="code1">b</div>
-                <div class="tab-pane" id="output1">c</div>
-                <div class="tab-pane" id="discussion1">d</div>
-              </div>
-              <br>
-              <a href="page_ce2.html"><button type="button" class="btn btn-default">Edit</button></a>
-              <br>
-            </div>
+          <div class="col-md-9" id="api_content">  
           </div>
           <div class="col-md-3">
-            <h3>You Need:</h3>
-          </div>
+            <div id="navbar" class="my-sider">
+              <ul class="nav nav-pills nav-stacked"  id="api_list">
+                <li><a href="#top">TOP</a></li>
+              </ul>
+            </div>
+          </div>  
         </div>
       </div>
     </main>
