@@ -23,3 +23,10 @@
 	padding: 10px;
 	overflow: auto;
 }
+.my_discussion{
+	height: 230px;	
+	overflow: auto;
+}
+.my_discussion_ipt{
+	margin-top: 12px;	
+}

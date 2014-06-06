@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile - KEEP CODING</title>
+    <!-- mycss -->
+    <link href="/css/mycss.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- cookie -->
+    <script src="/js/jquery.cookie.js"></script>
+    <!-- script -->
+    <script type="text/javascript">
+      var username = "";
+      var user_id = "";
+      $(document).ready(function(){
+        /* check login */
+        $.get("/isAuthenticated", function(user){
+          if(user != ""){
+            username = user.DisplayName;
+            user_id = user._id
+            $.cookie("username", user.DisplayName, {  path: '/' });
+            $("#user_name_span").append(user.DisplayName);  
+            $("#login_btn").addClass("hidden");
+            $("#mypage_btn").removeClass("hidden");
+            $("#whose_page").append(user.DisplayName+"`s Page");
+            /* get content */
+            $.get("/example/showAllExamplesByUser?id="+user._id, function(example){
+              example.examples.forEach(function(value, index){
+                var discussion_content = "";
+                value.Discussions.forEach(function(discussion){
+                  discussion_content += discussion.Content;
+                });
+                $("#your_examples").append('<div id="example'+index+'"><h2 id="example_for'+index+'">Example'+(index+1)+'</h2><ul class="nav nav-tabs"><li class="active"><a href="#description'+index+'" data-toggle="tab">Description</a></li><li><a href="#code'+index+'" data-toggle="tab">Code</a></li><li><a href="#output'+index+'" data-toggle="tab">Output</a></li><li><a href="#discussions'+index+'" data-toggle="tab">Discussions</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="description'+index+'">'+value.Description+'</div><div class="tab-pane" id="code'+index+'">'+value.Code+'</div><div class="tab-pane" id="output'+index+'">'+value.Output+'</div><div class="tab-pane" id="discussions'+index+'"><div class="my_discussion" id="discussion_content'+index+'">'+discussion_content+'</div><div class="input-group my_discussion_ipt"><input target-btn="#send'+index+'" type="text" class="form-control" id="'+value._id+'"><span class="input-group-btn"><button id="send'+index+'" example-id="'+value._id+'" class="btn btn-default" type="button" discussion-target="#discussion_content'+index+'"><i class="fa fa-comment"></i></button></span></div></div></div><br><a href="/page_ee.html?eid='+value._id+'"><button type="button" class="btn btn-default">Edit</button></a><br></div>');
+              });
+              $("button[example-id]").click(function(){
+                var example_id = $(this).attr("example-id");
+                var string = $("#"+example_id).val();
+                var target = $(this).attr("discussion-target");
+                if(string != ""){
+                  string = username + ":<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+ string +"<br><br>";
+                  $.post("/discussion/create", { Content: string, ExampleID: example_id, CreatedBy: user_id }, function(data){
+                    $(target).append(string);
+                    $("#"+example_id).val("");
+                  });
+                }
+              });
+              $("input[target-btn]").keyup(function(){
+                var btn_id = $(this).attr("target-btn");
+                if(event.keyCode == 13){
+                  $(btn_id).click();
+                }
+              });
+            }, "json");
+          }
+          else{
+            $.cookie("username", null, {  path: '/' });
+          }
+        }, "json");
+        /* get need Cplusplus */
+        $.get("/api/showTheHighestNeeded?Language=Cplusplus&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_cplusplus").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* get need Java */
+        $.get("/api/showTheHighestNeeded?Language=Java&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_java").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* get need Php */
+        $.get("/api/showTheHighestNeeded?Language=Php&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_php").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* get need NodeJS */
+        $.get("/api/showTheHighestNeeded?Language=NodeJS&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_nodejs").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* get need Csharp */
+        $.get("/api/showTheHighestNeeded?Language=Csharp&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_csharp").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* get need JavaScript */
+        $.get("/api/showTheHighestNeeded?Language=JavaScript&limit=5", function(data){
+          data.examples.forEach(function(value, index){
+            $("#need_javascript").append('<li><a href="page_ce2.html?apiID='+ value._id +'">'+ value.FunctionName +'<span class="badge pull-right">'+ value.NeedNumber +'</span></a></li>');
+          });
+        }, "json");
+        /* search */
+        $("#search_btn_nav").click(function(){
+          window.open("/page_search.html?lan="+$("#lang_nav").val()+"&cnt="+$("#text_nav").val(), "_self");
+        });
+        /* affix */        
+        $('#your_help').affix({
+          offset: {
+            top: $("#your_help").offset().top
+          }
+        });
+      });
+      /* send discussion */
+      function sendDis(index){
+        var example_id = $("#send"+index).attr("example-id");
+        var string = "" + $("#"+example_id).val();
+        var target = $("#send"+index).attr("discussion-target");
+        if(string != ""){
+          string = username + ":<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+ string +"<br><br>";
+          $.post("/discussion/create", { Content: string, ExampleID: example_id, CreatedBy: user_id }, function(data){
+            $(target).append(string);
+            $("#"+example_id).val("");
+          });
+        }
+      }
+      function sendByKey(index){
+        if(event.keyCode == 13){
+          $("#send"+index).click();
+        }
+      }
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#navbar">
+    <header class="navbar-static-top" id="top" role="banner">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar_collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">KEEP CODING</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="navbar_collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Language<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/page_lang.html?Language=Cplusplus">Cplusplus</a></li>
+                  <li><a href="/page_lang.html?Language=Java">Java</a></li>
+                  <li><a href="/page_lang.html?Language=Php">Php</a></li>
+                  <li><a href="/page_lang.html?Language=NodeJS">NodeJS</a></li>
+                  <li><a href="/page_lang.html?Language=Csharp">Csharp</a></li>
+                  <li><a href="/page_lang.html?Language=JavaScript">JavaScript</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="col-md-6">
+              <form class="navbar-form navbar-left" role="search" action="/page_search.html" method="get">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" id="text_nav" name="cnt"> 
+                    <div class="input-group-btn">
+                      <select class="form-control" id="lang_nav" name="lan">
+                        <option value="Cplusplus">Cplusplus</option>
+                        <option value="Java">Java</option>
+                        <option value="Php">Php</option>
+                        <option value="NodeJS">NodeJS</option>
+                        <option value="Csharp">Csharp</option>
+                        <option value="JavaScript">JavaScript</option>
+                      </select>
+                    </div>
+                    <div class="input-group-btn">
+                      <botton type="submit" class="btn btn-default" id="search_btn_nav"><span class="glyphicon glyphicon-search"></span></botton>
+                    </div>
+                  </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+              </form>
+            </div><!-- /.col-md-6 -->
+            <ul class="nav navbar-nav navbar-right">
+              <li id="login_btn"><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+              <li class="dropdown hidden" id="mypage_btn">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="user_name_span"></span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/page_profile.html">Profile</a></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <main role="main">
+      <div class="my-padding" id="banner">
+        <div class="container">
+          <h1 id="whose_page"></h1>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9" id="your_examples">
+            <h2>Your Examples</h2>  
+          </div>
+          <div class="col-md-3">
+            <div id="your_help" class="my-sider">
+              <h3>Need Your Help</h3>
+              <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Cplusplus</a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_cplusplus">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Java</a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_java">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Php</a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_php">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">NodeJS</a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_nodejs">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Csharp</a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_csharp">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">JavaScript</a>
+                    </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav nav-pills nav-stacked" id="need_javascript">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.panel-group -->
+            </div><!-- /.my-sider -->
+          </div><!-- /.col-md-3 -->
+        </div><!--/.row  -->
+      </div>
+    </main>
+    <footer class="my-footer">
+      <div class="container">
+        <p>Term Project</p>
+      </div>
+    </footer>
+    <!-- Login Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <div class="btn-toolbar">
+              <a href="http://127.0.0.1.xip.io:5000/auth/facebook">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
+                  <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
+                </div>
+              </a>
+            </div>
+            <br>
+            <div class="btn-toolbar">
+              <a href="http://127.0.0.1:5000/auth/google">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-danger btn-lg"><i class="fa fa-google-plus"></i></button>
+                  <button type="button" class="btn btn-danger btn-lg">Login with <b>Google+</b></button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- Login Modal -->
+  </body>
+</html>

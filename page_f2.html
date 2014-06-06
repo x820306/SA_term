@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/mycss.css" rel="stylesheet">
-  <!-- Font Awesome -->
+  <head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mycss.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-
-  <script type="text/javascript" src="js/jquery.url.min.js"></script>
-  <script type="text/javascript" src="js/json.js"></script>
-  <script type="text/javascript" src="js/json2.js"></script>
-
-  <script type="text/javascript" src="js/jquery.cookie.js"></script>
-<title>Function</title>
-  <script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery.url.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <title>Function</title>
+    <script type="text/javascript">
       $(document).ready(function(){
         /* check login */
-        $.get("/isAuthenticated", function(data){
-          if(data != ""){
-            $.cookie("username", data.DisplayName, {  path: '/' });
-            $("#user_name_span").append(data.DisplayName);  
+        $.get("/isAuthenticated", function(user){
+          if(user != ""){
+            $.cookie("username", user.DisplayName, {  path: '/' });
+            $("#user_name_span").append(user.DisplayName);  
             $("#login_btn").addClass("hidden");
             $("#mypage_btn").removeClass("hidden");
           }
@@ -30,36 +26,24 @@
           }
         }, "json");
         /* search */
-        $("#search_btn").click(function(){
+        $("#search_btn_nav").click(function(){
           window.open("/page_search.html?lan="+$("#lang_nav").val()+"&cnt="+$("#text_nav").val(), "_self");
         });
       });
     </script>
-  <style type="text/css">
-    .igrp
-    {
-      margin-top: 12px;	
-    }
-    .dscc
-    {
-      height: 230px;	
-      overflow: auto;
-    }
-    .dv_tag{
-      color: red;
-      display: inline
-    }
-    .dv_tag2{
-      display: inline
-	  
-    }
-	
-  </style>
-
-</head>
-<body>
-
-  <header class="navbar-static-top" id="top" role="banner">
+    <style type="text/css">
+      .dv_tag{
+        color: red;
+        display: inline
+      }
+      .dv_tag2{
+        display: inline
+  	  
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar-static-top" id="top" role="banner">
       <nav class="navbar navbar-default" role="navigation">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -88,12 +72,12 @@
               </li>
             </ul>
             <div class="col-md-6">
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left" role="search" action="/page_search.html" method="get">
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" id="text_nav"> 
+                    <input type="text" class="form-control" placeholder="Search" id="text_nav" name="cnt"> 
                     <div class="input-group-btn">
-                      <select class="form-control" id="lang_nav">
+                      <select class="form-control" id="lang_nav" name="lan">
                         <option value="Cplusplus">Cplusplus</option>
                         <option value="Java">Java</option>
                         <option value="Php">Php</option>
@@ -103,7 +87,7 @@
                       </select>
                     </div>
                     <div class="input-group-btn">
-                      <botton type="submit" class="btn btn-default" id="search_btn"><span class="glyphicon glyphicon-search"></span></botton>
+                      <botton type="submit" class="btn btn-default" id="search_btn_nav"><span class="glyphicon glyphicon-search"></span></botton>
                     </div>
                   </div><!-- /.input-group -->
                 </div><!-- /.form-group -->
@@ -114,7 +98,7 @@
               <li class="dropdown hidden" id="mypage_btn">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="user_name_span"></span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/mypage.html">Mypage</a></li>
+                  <li><a href="/page_profile.html">Profile</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </li>
@@ -123,57 +107,58 @@
         </div><!-- /.container -->
       </nav>
     </header>
-  <main role="main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9" id="col9">
-          <div style="font-size:40pt" id="fN"></div>
-          <TABLE width=100%>
-          <TR><TD align="right">
-          <div style="font-size:20pt" id="fN2" class="dv_tag">0</div>
-          <div style="font-size:15pt" id="fN3" class="dv_tag2">&nbsp Need</div>
-          </TD></TR>
-          <TABLE>
-          <br>
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#tabb1" data-toggle="tab">Introduction</a></li>
-            <li><a href="#tabb2" data-toggle="tab">Parameters</a></li>
-            <li><a href="#tabb3" data-toggle="tab">Return Value</a></li>
-            <li><a href="#tabb4" data-toggle="tab">Compatibility</a></li>
-            <li><a href="#tabb5" data-toggle="tab">See Also</a></li>
-          </ul>
-          <div class="tab-content my-tab-content">
-            <div class="tab-pane active" id="tabb1"></div>
-            <div class="tab-pane" id="tabb2"></div>
-            <div class="tab-pane" id="tabb3"></div>
-            <div class="tab-pane" id="tabb4"></div>
-            <div class="tab-pane" id="tabb5"></div>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9" id="col9">
+            <div style="font-size:40pt" id="fN"></div>
+            <TABLE width=100%>
+              <TR>
+                <TD align="right">
+                  <div style="font-size:20pt" id="fN2" class="dv_tag">0</div>
+                  <div style="font-size:15pt" id="fN3" class="dv_tag2">&nbsp Need</div>
+                </TD>
+              </TR>
+            </TABLE>
+            <br>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tabb1" data-toggle="tab">Introduction</a></li>
+              <li><a href="#tabb2" data-toggle="tab">Parameters</a></li>
+              <li><a href="#tabb3" data-toggle="tab">Return Value</a></li>
+              <li><a href="#tabb4" data-toggle="tab">Compatibility</a></li>
+              <li><a href="#tabb5" data-toggle="tab">See Also</a></li>
+            </ul>
+            <div class="tab-content my-tab-content">
+              <div class="tab-pane active" id="tabb1"></div>
+              <div class="tab-pane" id="tabb2"></div>
+              <div class="tab-pane" id="tabb3"></div>
+              <div class="tab-pane" id="tabb4"></div>
+              <div class="tab-pane" id="tabb5"></div>
+            </div>
+            <br>
+            <TABLE>
+              <TR>
+                <TD id="ceBtn">
+                  <a><button type="button" style="width: 150px;" class="btn btn-default" onclick="alert('Please login!');">Create Example</button></a> 
+                </TD>
+                <TD id="neBtn">
+                  &nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="alert('Please login!');">Need Example</button></a>
+                </TD>
+              </TR>
+            </TABLE>
+            <br>
           </div>
-          <br>
-          <TABLE>
-          <TR>
-          <TD id="ceBtn">
-			<a><button type="button" style="width: 150px;" class="btn btn-default" onclick="alert('Please login!');">Create Example</button></a> 
-           </TD>
-           <TD id="neBtn">
-           &nbsp&nbsp&nbsp&nbsp <a><button style="width: 150px;" type="button" class="btn btn-default" onclick="alert('Please login!');">Need Example</button></a>
-           </TD>
-           <TR>
-           </TABLE>
-          <br>
-          
-        </div>
-        <div class="col-md-3">
+          <div class="col-md-3">
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-  <footer class="my-footer">
-    <div class="container">
-      <p>Term Project</p>
-    </div>
-  </footer>
-      <!-- Login Modal -->
+    </main>
+    <footer class="my-footer">
+      <div class="container">
+        <p>Term Project</p>
+      </div>
+    </footer>
+    <!-- Login Modal -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -496,7 +481,7 @@
 							
                $('#col9').append('<br><div style="font-size:20pt"><TABLE width=100%><TR><TD>#'+counter+' '+atrid[counter-1].DisplayName+'</TD><TD align="right" valign="bottom"><div id="ltag'+counter+'" class="dv_tag" style="font-size:14pt">'+lk[counter-1]+' </div><div id="l2tag'+counter+'" class="dv_tag2">&nbsp&nbsp<button type="button" onclick="plg();" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button></div></TD></TR></TABLE></div>');
 
-              $('#col9').append('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">'+de[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'2">'+co[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'3">'+ou[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="dscc"></div><div class="input-group igrp"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn" id="span'+counter+'"><button onclick="plg();" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
+              $('#col9').append('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">'+de[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'2">'+co[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'3">'+ou[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="my_discussion"></div><div class="input-group my_discussion_ipt"><input type="text" class="form-control" id="ipt'+counter+'"><span class="input-group-btn" id="span'+counter+'"><button onclick="plg();" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
             }
                      },
                      error: function() {
@@ -613,7 +598,7 @@
                      }
                  });
 		  </script>
-</body>
+  </body>
 </html>
 
 
