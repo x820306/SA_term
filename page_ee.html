@@ -4,14 +4,36 @@
 <meta charset="utf-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/mycss.css" rel="stylesheet">
+<!-- Font Awesome -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+
+
 <script type="text/javascript" src="js/jquery.url.min.js"></script>
 <script type="text/javascript" src="js/json.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
-
+  <script type="text/javascript">
+      $(document).ready(function(){
+        /* check login */
+        $.get("/isAuthenticated", function(data){
+          if(data != ""){
+            $.cookie("username", data.DisplayName, {  path: '/' });
+            $("#user_name_span").append(data.DisplayName);  
+            $("#login_btn").addClass("hidden");
+            $("#mypage_btn").removeClass("hidden");
+          }
+          else{
+            $.cookie("username", null, {  path: '/' });
+          }
+        }, "json");
+        /* search */
+        $("#search_btn").click(function(){
+          window.open("/page_search.html?lan="+$("#lang_nav").val()+"&cnt="+$("#text_nav").val(), "_self");
+        });
+      });
+    </script>
 	<style type="text/css">
 	.panel-default
 	{
@@ -41,22 +63,26 @@
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar_collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">KEEP CODING</a>
+            <a class="navbar-brand" href="/">KEEP CODING</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse">
+          <div class="collapse navbar-collapse" id="navbar_collapse">
             <ul class="nav navbar-nav">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programming Language<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="language.html">C/C++</a></li>
-                  <li><a href="language.html">Java</a></li>
+                  <li><a href="/page_lang.html?Language=Cplusplus">Cplusplus</a></li>
+                  <li><a href="/page_lang.html?Language=Java">Java</a></li>
+                  <li><a href="/page_lang.html?Language=Php">Php</a></li>
+                  <li><a href="/page_lang.html?Language=NodeJS">NodeJS</a></li>
+                  <li><a href="/page_lang.html?Language=Csharp">Csharp</a></li>
+                  <li><a href="/page_lang.html?Language=JavaScript">JavaScript</a></li>
                 </ul>
               </li>
             </ul>
@@ -64,28 +90,36 @@
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search"> 
+                    <input type="text" class="form-control" placeholder="Search" id="text_nav"> 
                     <div class="input-group-btn">
-                      <select class="form-control">
-                        <option value="All">All</option>
-                        <option value="C/C++">C/C++</option>
+                      <select class="form-control" id="lang_nav">
+                        <option value="Cplusplus">Cplusplus</option>
                         <option value="Java">Java</option>
+                        <option value="Php">Php</option>
+                        <option value="NodeJS">NodeJS</option>
+                        <option value="Csharp">Csharp</option>
+                        <option value="JavaScript">JavaScript</option>
                       </select>
                     </div>
                     <div class="input-group-btn">
-                      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                      <botton type="submit" class="btn btn-default" id="search_btn"><span class="glyphicon glyphicon-search"></span></botton>
                     </div>
                   </div><!-- /.input-group -->
                 </div><!-- /.form-group -->
               </form>
-            </div>
+            </div><!-- /.col-md-6 -->
             <ul class="nav navbar-nav navbar-right">
-               <li id="mp"><a href="mypage.html">Mypage</a></li>
-               <li id="in_out"><a href="login.html">Login</a></li>
-              <li><a href="#">Sign up</a></li>
+              <li id="login_btn"><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+              <li class="dropdown hidden" id="mypage_btn">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="user_name_span"></span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/mypage.html">Mypage</a></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
             </ul>
           </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+        </div><!-- /.container -->
       </nav>
     </header>
 
@@ -137,6 +171,44 @@
 <br>
 <br>
 </main>
+<footer class="my-footer">
+    <div class="container">
+      <p>Term Project</p>
+    </div>
+  </footer>
+    <!-- Login Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <div class="btn-toolbar">
+              <a href="http://127.0.0.1.xip.io:5000/auth/facebook">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary btn-lg"><span class="fa fa-facebook"></span></button>
+                  <button type="button" class="btn btn-primary btn-lg">Login with <b>facebook</b></button>
+                </div>
+              </a>
+            </div>
+            <br>
+            <div class="btn-toolbar">
+              <a href="http://127.0.0.1:5000/auth/google">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-danger btn-lg"><i class="fa fa-google-plus"></i></button>
+                  <button type="button" class="btn btn-danger btn-lg">Login with <b>Google+</b></button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- Login Modal -->
  <script type="text/javascript"> 
  
    var eid=$.url.param("eid");
@@ -173,8 +245,7 @@
                      success: function(Jdata2) {
 						var usrID=Jdata2._id;
 						var usrName=Jdata2.DisplayName;
-						document.getElementById('in_out').innerHTML='<a href="logout" onclick="lgt();">Logout</a>';
-						document.getElementById('mp').innerHTML='<a href="mypage.html">'+usrName+'</a>';
+
 						var cok=$.cookie('cookie');
 						if(cok==null){
 						 $.cookie('cookie',usrID);
