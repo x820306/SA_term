@@ -44,7 +44,7 @@
     	}
     	#btn2
     	{
-    		width: 80px;
+    		width: 100px;
     	}
   	</style>
   </head>
@@ -123,11 +123,14 @@
               <input id="txt" type="text" class="form-control">
               <div id="btn1" class="input-group-btn">
                 <button class="btn btn-default" type="button" onclick="to_search();"><span class="glyphicon glyphicon-search"></span></button>
-                <button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <button id="btn2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp <span class="caret"></span></button>
                 <ul class="dropdown-menu pull-right">
-                  <li onclick="set_target(1);"><input id="chh1" type="hidden" value="C"><a herf="" id="cx1">C</a></li>
-                  <li onclick="set_target(2);"><input id="chh2" type="hidden" value="Cplusplus"><a herf="" id="cx2">C++</a></li>
-                  <li onclick="set_target(3);"><input id="chh3" type="hidden" value="JAVA"><a herf="" id="cx3">JAVA</a></li>
+                  <li onclick="set_target(1);"><input id="chh1" type="hidden" value="Cplusplus"><a herf="" id="cx1">C/C++</a></li>
+                  <li onclick="set_target(2);"><input id="chh2" type="hidden" value="Java"><a herf="" id="cx2">Java</a></li>
+                  <li onclick="set_target(3);"><input id="chh3" type="hidden" value="Php"><a herf="" id="cx3">Php</a></li>
+                   <li onclick="set_target(4);"><input id="chh4" type="hidden" value="NodeJS"><a herf="" id="cx4">NodeJS</a></li>
+                    <li onclick="set_target(5);"><input id="chh5" type="hidden" value="Csharp"><a herf="" id="cx5">C#</a></li>
+                     <li onclick="set_target(6);"><input id="chh6" type="hidden" value="JavaScript"><a herf="" id="cx6">JavaScript</a></li>
                   <!-- /新增語言只要加在這裡就可以了,比如<li onclick="set_target(4);"><input id="chh4" type="hidden" value="NODEJS"><a herf="" id="cx4">Node.js</a></li>，chh4的value是要送去給app.js的(不能帶符號)，cx4的innerHTML則是顯示在畫面上用 -->
                 </ul>
               </div><!-- /btn-group -->
@@ -203,7 +206,7 @@ var fid=[];
  {
 	lan=document.getElementById('chh'+cxx).value; 
 
-document.getElementById('btn2').innerHTML=document.getElementById('cx'+cxx).innerHTML+'<span class="caret"></span>';
+document.getElementById('btn2').innerHTML=document.getElementById('cx'+cxx).innerHTML+'&nbsp<span class="caret"></span>';
  }
  
  function to_search()
@@ -243,14 +246,23 @@ document.getElementById('btn2').innerHTML=document.getElementById('cx'+cxx).inne
   }
   
   
-lan=document.getElementById('chh1').value; 
-document.getElementById('btn2').innerHTML=document.getElementById('cx1').innerHTML+'<span class="caret"></span>';
+set_target(1);
   
 if(lan0!='')
 {
 	document.getElementById('txt').value=cnt;
 	lan=lan0;
 	
+	if(lan=='Cplusplus')
+	{
+		document.getElementById('btn2').innerHTML='C/C++&nbsp<span class="caret"></span>';
+		
+	}else if(lan=='Csharp'){
+		document.getElementById('btn2').innerHTML='C#&nbsp<span class="caret"></span>';
+		
+	}else{
+		document.getElementById('btn2').innerHTML=lan+'&nbsp<span class="caret"></span>';	
+	}
     to_search();
 }
 
