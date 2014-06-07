@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+</head>
+
+
+<body id="gsc">
+<form action="/api/create" method="POST" name="api" id="a1">
+
+<input type="hidden" name="Language" id="i1"><br>
+<input type="hidden" name="Introduction" id="i2"><br>
+<input type="hidden" name="FunctionName" id="i3"><br>
+<input type="hidden" name="Parameter" id="i4"><br>
+<input type="hidden" name="ReturnValue" id="i5"><br>
+<input type="hidden" name="SeeAlso" id="i6"><br>
+<input type="hidden" name="Compatibility" id="i7"><br>
+
+</form>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    $.ajax({
+        type: "GET",
+        url: "insert.txt",
+        dataType: "text",
+        success: function(data) {processData(data);},
+		error:function(){ 
+                    alert('submit fail'); 
+                 }
+     });
+
+
+function processData(allText) {
+	  
+    var allTextLines = allText.split('\r\n');
+  
+   for (var i=0; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split('!');
+		document.getElementById('i1').value=data[0].replace(/\n/g,"<br>");
+		document.getElementById('i2').value=data[1].replace(/\n/g,"<br>");
+		document.getElementById('i3').value=data[2].replace(/\n/g,"<br>");
+		document.getElementById('i4').value=data[3].replace(/\n/g,"<br>");
+		document.getElementById('i5').value=data[4].replace(/\n/g,"<br>");
+		document.getElementById('i6').value=data[5].replace(/\n/g,"<br>");
+		document.getElementById('i7').value=data[6].replace(/\n/g,"<br>");	
+		
+		 $.ajax({
+                url: '/api/create',
+				async: false,
+                data:$('#a1').serialize(),
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+					$('#gsc').append(i+'<br>');
+				},
+
+                 error:function(){ 
+                    alert('submit fail'); 
+                 }
+               }); 
+       
+    }
+   
+}
+
+
+
+
+</script>
