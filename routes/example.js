@@ -14,12 +14,12 @@ exports.list = function(req, res){
 };
 
 exports.create = function(req, res){
-	var example = new Example();
-	example.Description = sanitizer.sanitize(req.body.Description);
-	example.Code = sanitizer.sanitize(req.body.Code);
-	example.Output = sanitizer.sanitize(req.body.Output);
-	example.CreatedBy = req.body.CreatedBy;
-	example.ApiID = req.body.ApiID;
+	var example = new Example(req.body);
+	// example.Description = sanitizer.sanitize(req.body.Description);
+	// example.Code = sanitizer.sanitize(req.body.Code);
+	// example.Output = sanitizer.sanitize(req.body.Output);
+	// example.CreatedBy = req.body.CreatedBy;
+	// example.ApiID = req.body.ApiID;
 
 	example.save(function (err, newexample){
 		if (err) {

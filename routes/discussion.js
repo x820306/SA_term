@@ -14,10 +14,10 @@ exports.list = function(req, res){
 };
 
 exports.create = function(req, res){
-	var discussion = new Discussion();
-	discussion.Content = sanitizer.sanitize(req.body.Content);
-	discussion.ExampleID =sanitizer.sanitize(req.body.ExampleID);
-	discussion.CreatedBy = sanitizer.sanitize(req.body.CreatedBy);
+	var discussion = new Discussion(req.body);
+	// discussion.Content = sanitizer.sanitize(req.body.Content);
+	// discussion.ExampleID = req.body.ExampleID;
+	// discussion.CreatedBy = req.body.CreatedBy;
 
 	discussion.save(function (err, newdiscussion){
 		if (err) {
@@ -67,7 +67,7 @@ exports.update = function(req, res){
 			res.json({error: err.name}, 500);
 		}
 		console.log(discussion);
-		discussion.Content = sanitizer.sanitize(req.body.Content);;
+		discussion.Content = req.body.Content;
 		discussion.UpdatedAt = Date.now();
 		discussion.save(function (err, newdiscussion){
 			if (err) {
