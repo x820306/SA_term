@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Example = mongoose.model('Example');
 var Api = mongoose.model('Api');
+var sanitizer = require('sanitizer');
 
 exports.list = function(req, res){
 	Example.find().populate('CreatedBy').populate('Likes').populate('Discussions').populate('ApiID').exec(function (err, examples, count){
@@ -13,7 +14,12 @@ exports.list = function(req, res){
 };
 
 exports.create = function(req, res){
-	var example = new Example(req.body);
+	var example = new Example();
+	example.Description = sanitizer.sanitize(req.body.Description);
+	example.Code = sanitizer.sanitize(req.body.Code);
+	example.Output = sanitizer.sanitize(req.body.Output);
+	example.CreatedBy = req.body.CreatedBy;
+	example.ApiID = req.body.ApiID;
 
 	example.save(function (err, newexample){
 		if (err) {
@@ -78,9 +84,9 @@ exports.update = function(req, res){
 			res.json({error: err.name}, 500);
 		}
 		console.log(example);
-		example.Description = req.body.Description;
-		example.Code = req.body.Code;
-		example.Output = req.body.Output;
+		example.Description = sanitizer.sanitize(req.body.Description);
+		example.Code = sanitizer.sanitize(req.body.Code);
+		example.Output = sanitizer.sanitize(req.body.Output);
 		example.UpdatedAt = Date.now();
 		example.save(function (err, newexample){
 			if (err) {

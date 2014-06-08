@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Discussion = mongoose.model('Discussion');
 var Example = mongoose.model('Example');
+var sanitizer = require('sanitizer');
 
 exports.list = function(req, res){
 	Discussion.find().populate('CreatedBy').populate('ExampleID').sort({"CreatedAt": 1}).exec(function (err, discussions, count){
@@ -13,7 +14,10 @@ exports.list = function(req, res){
 };
 
 exports.create = function(req, res){
-	var discussion = new Discussion(req.body);
+	var discussion = new Discussion();
+	discussion.Content = sanitizer.sanitize(req.body.Content);
+	discussion.ExampleID =sanitizer.sanitize(req.body.ExampleID);
+	discussion.CreatedBy = sanitizer.sanitize(req.body.CreatedBy);
 
 	discussion.save(function (err, newdiscussion){
 		if (err) {
@@ -63,7 +67,7 @@ exports.update = function(req, res){
 			res.json({error: err.name}, 500);
 		}
 		console.log(discussion);
-		discussion.Content = req.body.Content;
+		discussion.Content = sanitizer.sanitize(req.body.Content);;
 		discussion.UpdatedAt = Date.now();
 		discussion.save(function (err, newdiscussion){
 			if (err) {
