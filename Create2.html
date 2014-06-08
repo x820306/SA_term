@@ -21,45 +21,43 @@
 
 </form>
 
-</body>
-</html>
 <script type="text/javascript">
 
     $.ajax({
         type: "GET",
-        url: "insert.txt",
+        url: "/insert.txt",
         dataType: "text",
         success: function(data) {processData(data);},
-		error:function(){ 
+        error:function(){ 
                     alert('submit fail'); 
                  }
      });
 
 
 function processData(allText) {
-	  
+      
     var allTextLines = allText.split('\r\n');
   
    for (var i=0; i<allTextLines.length; i++) {
         var data = allTextLines[i].split('!');
-		document.getElementById('i1').value=data[0].replace(/\n/g,"<br>");
-		document.getElementById('i2').value=data[1].replace(/\n/g,"<br>");
-		document.getElementById('i3').value=data[2].replace(/\n/g,"<br>");
-		document.getElementById('i4').value=data[3].replace(/\n/g,"<br>");
-		document.getElementById('i5').value=data[4].replace(/\n/g,"<br>");
-		document.getElementById('i6').value=data[5].replace(/\n/g,"<br>");
-		document.getElementById('i7').value=data[6].replace(/\n/g,"<br>");	
-		
-		 $.ajax({
+        document.getElementById('i1').value=data[0].replace(/\n/g,"<br>");
+        document.getElementById('i2').value=data[1].replace(/\n/g,"<br>");
+        document.getElementById('i3').value=data[2].replace(/\n/g,"<br>");
+        document.getElementById('i4').value=data[3].replace(/\n/g,"<br>");
+        document.getElementById('i5').value=data[4].replace(/\n/g,"<br>");
+        document.getElementById('i6').value=data[5].replace(/\n/g,"<br>");
+        document.getElementById('i7').value=data[6].replace(/\n/g,"<br>");  
+        
+         $.ajax({
                 url: '/api/create',
-				async: false,
+                async: false,
                 data:$('#a1').serialize(),
                 type:"POST",
                 dataType:'text',
 
                 success: function(msg){
-					$('#gsc').append(i+'<br>');
-				},
+                    $('#gsc').append(i+'<br>');
+                },
 
                  error:function(){ 
                     alert('submit fail'); 
@@ -74,3 +72,6 @@ function processData(allText) {
 
 
 </script>
+
+</body>
+</html>
