@@ -31,14 +31,31 @@
       });
     </script>
   	<style type="text/css">
-    	.panel-default
+    	.pa1
     	{
     		height: 300px;
+			width: 100%
+    	}
+		
+		.pa2
+    	{
+    		height: 60px;
+			width: 100%
     	}
     	.tarea
     	{
     		width: 100%;
     		height: 259px;
+    		border-top-style: none;
+    		border-right-style: none;
+    		border-bottom-style: none;
+    		border-left-style: none;
+    	}
+		
+		.tarea2
+    	{
+    		width: 100%;
+    		
     		border-top-style: none;
     		border-right-style: none;
     		border-bottom-style: none;
@@ -119,25 +136,25 @@
             <div style="font-size:40pt">Create Example</div>
             <br>
             <form name="example" id="exp" action="/example/create" method="post">
-              <div class="panel panel-default">
+              <div class="panel panel-default pa1">
                 <div class="panel-heading">
                   <h3 class="panel-title">Description</h3>
                 </div>
-                <textarea class="tarea" name="Description"></textarea>
+                <textarea class="tarea" name="Description" id="ta1"></textarea>
               </div>
               <br>
-              <div class="panel panel-default">
+              <div class="panel panel-default pa1">
                 <div class="panel-heading">
                   <h3 class="panel-title">Code</h3>
                 </div>
-                <textarea class="tarea" name="Code"></textarea>
+                <textarea class="tarea" name="Code" id="ta2"></textarea>
               </div>
               <br>
-              <div class="panel panel-default">
+              <div class="panel panel-default pa2">
                 <div class="panel-heading">
                   <h3 class="panel-title">Output</h3>
                 </div>
-                <textarea class="tarea" name="Output"></textarea>
+                <input type="text" class="tarea2" name="Output" id="ta3" placeholder="     Fill in one picture link here">
               </div>
               <div id="hidden">
                 <input type="hidden" name="CreatedBy" value="">
@@ -203,7 +220,16 @@
    
    function Submit()
    {
-	     var apid2=$.url.param("apiID");
+		 var apid2=$.url.param("apiID");
+		 
+		 if((document.getElementById('ta1').value=="")||(document.getElementById('ta2').value=="")||(document.getElementById('ta3').value==""))
+		 {
+			 alert('Plaese Finish The Form');
+			 return;
+		 }
+		 
+		 document.getElementById('ta1').value=document.getElementById('ta1').value.replace(/\n/g,"<br>");
+		  document.getElementById('ta2').value=document.getElementById('ta2').value.replace(/\n/g,"<br>");
 		 
 		 $.ajax({
                 url: '/example/create',
