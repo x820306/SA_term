@@ -17,6 +17,12 @@
     <script src="/js/jquery.cookie.js"></script>
     <!-- script -->
     <script type="text/javascript">
+	function checkTime(i)
+{
+if (i<10) 
+  {i="0" + i}
+  return i
+}
       var username = "";
       var user_id = "";
       $(document).ready(function(){
@@ -45,7 +51,7 @@
                 var string = $("#"+example_id).val();
                 var target = $(this).attr("discussion-target");
                 if(string != ""){
-                  string = username + ":<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+ string +"<br>"+myDate.getMonth()+'/'+myDate.getDate()+'/'+myDate.getFullYear()+' '+myDate.getHours()+':'+myDate.getMinutes()+':'+myDate.getSeconds()+"<br><br>";
+                  string = username + ":<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+ string +"<br>"+myDate.getMonth()+'/'+myDate.getDate()+'/'+myDate.getFullYear()+' '+checkTime(myDate.getHours())+':'+checkTime(myDate.getMinutes())+':'+checkTime(myDate.getSeconds())+"<br><br>";
                   $.post("/discussion/create", { Content: string, ExampleID: example_id, CreatedBy: user_id }, function(data){
                     $(target).append(string);
                     $("#"+example_id).val("");

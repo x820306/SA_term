@@ -384,7 +384,12 @@
 			
             }
 			
-
+function checkTime(i)
+{
+if (i<10) 
+  {i="0" + i}
+  return i
+}
             function keyF(ctt,nameF)
             {
               if(document.getElementById('ipt'+ctt).value=="")
@@ -393,7 +398,8 @@
 			  }
             
 			  var myDate=new Date();
-			  var conToSend=nameF+':<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value+'<br>'+myDate.getMonth()+'/'+myDate.getDate()+'/'+myDate.getFullYear()+' '+myDate.getHours()+':'+myDate.getMinutes()+':'+myDate.getSeconds()+'<br><br>';
+			  
+			  var conToSend=nameF+':<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+document.getElementById('ipt'+ctt).value+'<br>'+myDate.getMonth()+'/'+myDate.getDate()+'/'+myDate.getFullYear()+' '+checkTime(myDate.getHours())+':'+checkTime(myDate.getMinutes())+':'+checkTime(myDate.getSeconds())+'<br><br>';
 			  document.getElementById('cntt').value=conToSend;
 			  document.getElementById('cntt2').value=exmpID[ctt-1];
 			   
@@ -432,6 +438,7 @@
                }); 
 			  
             }
+			
 			
 			$.ajax(
 				{ url: '/api/showOne?id='+id,
@@ -485,8 +492,17 @@
 							
                $('#col9').append('<br><div style="font-size:20pt"><TABLE width=100%><TR><TD>#'+counter+' '+atrid[counter-1].DisplayName+'</TD><TD align="right" valign="bottom"><div id="ltag'+counter+'" class="dv_tag" style="font-size:14pt">'+lk[counter-1]+' </div><div id="l2tag'+counter+'" class="dv_tag2">&nbsp&nbsp<button type="button" onclick="plg();" style="font-size:12pt"><img src="image/like.png" width="21" height="18"></button></div></TD></TR></TABLE></div>');
 
-              $('#col9').append('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">'+de[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'2">'+co[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'3"><img src="'+ou[counter-1]+'"></div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="my_discussion"></div><div class="input-group my_discussion_ipt"><input type="text" placeholder="Comment..." class="form-control" id="ipt'+counter+'"><span class="input-group-btn" id="span'+counter+'"><button onclick="plg();" class="btn btn-default" type="button">輸入</button></span></div></div></div>');
+              $('#col9').append('<ul class="nav nav-tabs"><li class="active"><a href="#tabb'+counter+'1" data-toggle="tab">Description</a></li><li><a href="#tabb'+counter+'2" data-toggle="tab">Code</a></li><li><a href="#tabb'+counter+'3" data-toggle="tab">Output</a></li><li><a href="#tabb'+counter+'4" data-toggle="tab">Discussion</a></li></ul><div class="tab-content my-tab-content"><div class="tab-pane active" id="tabb'+counter+'1">'+de[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'2">'+co[counter-1]+'</div><div class="tab-pane" id="tabb'+counter+'3"><img src="'+ou[counter-1]+'"></div><div class="tab-pane" id="tabb'+counter+'4"><div id="dsc'+counter+'" class="my_discussion"></div><div class="input-group my_discussion_ipt"><input target-btn="#send'+counter+'" type="text" placeholder="Comment..." class="form-control" id="ipt'+counter+'"><span class="input-group-btn" id="span'+counter+'"><button id="send'+counter+'" onclick="plg();" class="btn btn-default" type="button"><i class="fa fa-comment-o"></i></button></span></div></div></div>');
             }
+			
+			$("input[target-btn]").keyup(function(){
+                var btn_id = $(this).attr("target-btn");
+                if(event.keyCode == 13){
+                  $(btn_id).click();
+                }
+              });
+			
+			
                      },
                      error: function() {
                           
@@ -583,7 +599,7 @@
                  				});
 							
 							
-							document.getElementById('span'+counter).innerHTML='<button onclick="keyF('+counter+',\''+usrName+'\');" class="btn btn-default" type="button">輸入</button>';
+							document.getElementById('span'+counter).innerHTML='<button id="send'+counter+'" onclick="keyF('+counter+',\''+usrName+'\');" class="btn btn-default" type="button"><i class="fa fa-comment-o"></i></button>';
 						
 						}
 						
