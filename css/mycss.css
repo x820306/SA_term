@@ -16,9 +16,9 @@
 	top: 20px;
 }
 .my-tab-content{
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
 	height: 300px;
 	padding: 10px;
 	overflow: auto;
